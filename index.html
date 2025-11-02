@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AlphaDocs Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+    .quiz-box {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 500px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+    h2 { text-align: center; }
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      margin-top: 10px;
+      cursor: pointer;
+      width: 100%;
+    }
+    button:hover { background-color: #0056b3; }
+  </style>
+</head>
+<body>
+  <div class="quiz-box">
+    <h2>Bulk Trade AlphaDocs Quiz</h2>
+    <div id="quiz"></div>
+    <button id="submit">Submit</button>
+    <p id="result"></p>
+  </div>
+
+  <script>
+    const quizData = [
+      {
+    question: 1. What is the core order matching component called in the Bulk Exchange architecture?
+A. ClearingHouse
+B. BULK Tile
+C. BULK Db
+D. BULK Net
+Correct answer: B. BULK Tile
+      },
+      {
+        question: "2. How often does the matching engine execute ticks in the Bulk system?
+A. Every 5 milliseconds
+B. Every 10 milliseconds
+C. Every 20 milliseconds
+D. Every 50 milliseconds
+Correct answer: C. Every 20 milliseconds
+      },
+      {
+        question: "3. In the Bulk Exchange order-book model, what major check happens before a new order is accepted?
+A. Deleveraging check
+B. Stop-Loss verification
+C. Pre-flight margin check
+D. Fee calculation
+Correct answer: C. Pre-flight margin check
+      },
+      {
+        question: "4. What mechanism is used by Bulk Exchange to determine the funding payments between long and short positions?
+A. Fixed daily fee
+B. Hourly funding rate calculated based on premium and interest rate components
+C. Monthly rebate system
+D. Random lottery
+Correct answer: B. Hourly funding rate calculated based on premium and interest rate components
+      }
+    ];
+
+    const quiz = document.getElementById("quiz");
+    const submitBtn = document.getElementById("submit");
+    const resultEl = document.getElementById("result");
+
+    function loadQuiz() {
+      quiz.innerHTML = "";
+      quizData.forEach((q, index) => {
+        quiz.innerHTML += `
+          <div>
+            <p>${q.question}</p>
+            <label><input type="radio" name="q${index}" value="a"> ${q.a}</label><br>
+            <label><input type="radio" name="q${index}" value="b"> ${q.b}</label><br>
+            <label><input type="radio" name="q${index}" value="c"> ${q.c}</label><br>
+            <label><input type="radio" name="q${index}" value="d"> ${q.d}</label><br><br>
+          </div>
+        `;
+      });
+    }
+
+    submitBtn.addEventListener("click", () => {
+      let score = 0;
+      quizData.forEach((q, i) => {
+        const ans = document.querySelector(`input[name="q${i}"]:checked`);
+        if (ans && ans.value === q.correct) score++;
+      });
+      resultEl.textContent = `✅ You got ${score}/${quizData.length} correct!`;
+    });
+
+    loadQuiz();
+  </script>
+</body>
+</html>
